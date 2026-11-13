@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Random Star Trek Quotes</title>
+    <link rel="stylesheet" href="css/styles.css" type="text/css">
+</head>
+
+<body>
+    <button id="get-quote">Data's once said...</button>
+    <div id="quote"></div>
+
+    <script>
+        let getQuote = document.getElementById("get-quote");
+        let quote = document.getElementById("quote");
+        let quoteList;
+
+        async function getQuotes() {
+            const response = await fetch("quotes.json");
+            console.log(response);
+
+            const data = await response.json();
+            console.log(data);
+
+            quoteList = data.quotes;
+            console.log(quoteList[2]);
+        }
+
+        getQuotes();
+
+        getQuote.addEventListener("click", function (){
+            if (quoteList && quoteList.length > 0) {
+            let randomIndex = Math.floor(Math.random() * quoteList.length);
+            let randomQuote = quoteList[randomIndex];
+            
+            quote.textContent = `"${randomQuote}"`;
+  
+        }
+        })
+
+    </script>
+
+</body>
+
+</html>
+
